@@ -1,5 +1,3 @@
 ```
-git status
-git add
-git commit
+ansible-playbook --ask-become-pass playbooks/install_nginx.yml
 ```
