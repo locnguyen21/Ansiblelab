@@ -1,3 +1,6 @@
 # Ansiblelab
-Lab Ansible
-Da them dong o duoi
+```
+git status
+git add
+git commit
+```
