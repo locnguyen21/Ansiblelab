@@ -1,0 +1,17 @@
+---
+  #host: liet ke cac host
+- hosts: all
+  #become sudo = true
+  become: true
+  
+  #task: cac nhiem vu duoc dinh nghia trong playbook
+  tasks:
+  #update yum truoc  
+  - name: update repository index
+    yum:
+      update_cache: yes 
+
+  #cai dat nginx
+  - name: install nginx package
+    yum:
+      name: nginx
