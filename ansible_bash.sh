@@ -1,3 +1,5 @@
+#day la file ad-hoc command
+
 #kiem tra moi thu dang hoat dong ok
 # ~ la home directory
 ansible all --key-file ~/.ssh/ansible -i inventory -m ping
