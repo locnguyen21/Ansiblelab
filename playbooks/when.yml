@@ -1,0 +1,25 @@
+---
+  #host: liet ke cac host
+- hosts: all
+  #become sudo = true
+  become: true
+  
+  #task: cac nhiem vu duoc dinh nghia trong playbook
+  tasks:
+  #update yum truoc  
+  - name: update repository index
+    yum:
+      update_cache: yes 
+    when: ansible_distribution == "CentOS"
+#   when: ansible_distribution in ["Debian", "Ubuntu"]
+  #cai dat nginx
+  - name: install nginx package
+    apt:
+      name: nginx
+    when: ansible_distribution == "CentOS"  
+#   when: ansible_distribution in ["Debian", "Ubuntu"]
+#   in ["", ""] the hien [] la item
+#   ansible_distribution la thong tin lay tu gather_facts
+#   when: ansible_distribution == "CentOS" and ansible_distribution_version == '8.2'
+
+
