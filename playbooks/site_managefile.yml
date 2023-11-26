@@ -1,0 +1,20 @@
+---
+
+- hosts: webservers
+  become: true
+  tasks:
+  
+  - name: install nginx
+    tags: webservers, centos
+    yum:
+      name: nginx
+      state: latest
+
+  - name: copy file for nginx site
+    tags: webservers, centos, nginx
+    copy:
+      src: managingfiles/default_site.html
+      dest: /var/www/html/index.html
+      owner: root
+      group: root
+      mode: 0644
