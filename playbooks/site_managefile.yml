@@ -29,9 +29,10 @@
       state: latest
   
   - name: download and install terraform, unzip file when copy 
-    unarchive:  #giai nen khi copy file 
+    unarchive:  #module giai nen khi copy file 
       src: https://releases.hashicorp.com/terraform/1.6.4/terraform_1.6.4_linux_amd64.zip
       dest: /usr/local/bin
+      # xac nhan src la down tu tren mang, khong phai tu host dieu khien
       remote_src: yes
       mode: 0755
       owner: root
