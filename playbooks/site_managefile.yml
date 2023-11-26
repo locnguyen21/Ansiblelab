@@ -18,3 +18,23 @@
       owner: root
       group: root
       mode: 0644
+   
+- hosts: dbservers
+  become: true
+  tasks:
+
+  - name: install unzip
+    yum:
+      name: unzip
+      state: latest
+  
+  - name: download and install terraform, unzip file when copy 
+    unarchive:  #giai nen khi copy file 
+      src: https://releases.hashicorp.com/terraform/1.6.4/terraform_1.6.4_linux_amd64.zip
+      dest: /usr/local/bin
+      remote_src: yes
+      mode: 0755
+      owner: root
+      group: root
+      
+
