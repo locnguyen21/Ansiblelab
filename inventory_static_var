@@ -1,0 +1,8 @@
+# chua danh sach cac host quan ly
+#khai bao them bien trong host
+192.168.10.3 apache_package=httpd php_package=php
+192.168.10.4 apache_package=httpd php_package=php
+
+#doi voi Ubuntu
+#192.168.10.5 apache-package=apache2 php-package=libapache2-mod-php
+

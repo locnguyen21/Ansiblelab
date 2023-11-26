@@ -1,0 +1,29 @@
+---
+  #host: liet ke cac host
+- hosts: all
+  #become sudo = true
+  become: true
+  
+  #task: cac nhiem vu duoc dinh nghia trong playbook
+  tasks:
+  #cai dat goi cho Ubuntu
+  - name: install and update index package for Ubuntu
+    apt:
+      name: 
+        - apache2
+        - libapache2-mod-php
+      state: latest
+      update_cache: yes
+    #so sanh voi file consolidate.yml, ban chat update_cache cung tu apt nen combine hai nhiem vu trong cung 1 task duoc
+    when: ansible_distribution in ["Debian", "Ubuntu"]
+  
+  #cai dat goi cho CentOS
+  - name: install and update index package  for Centos
+    yum:
+      name: 
+        - httpd
+        - php
+      state: latest
+    #  state: absent
+      update_cache: yes
+    when: ansible_distribution == "CentOS"

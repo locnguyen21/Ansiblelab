@@ -1,0 +1,37 @@
+---
+  #host: liet ke cac host
+- hosts: all
+  #become sudo = true
+  become: true
+  
+  #task: cac nhiem vu duoc dinh nghia trong playbook
+  tasks:
+  #cap nhat repo cho Ubuntu 
+  - name: update repo index for Ubuntu
+    apt:
+      update_cache: yes
+    when: ansible_distribution in ["Debian", "Ubuntu"]
+
+  #cai dat goi cho Ubuntu
+  - name: install package for Ubuntu
+    apt:
+      name: 
+        - apache2
+        - libapache2-mod-php
+      state: latest
+    when: ansible_distribution in ["Debian", "Ubuntu"]
+  
+  #cap nhat repo cho CentOS
+  - name: update repo index for CentOS
+    yum: 
+      update_cache: yes
+    when: ansible_distribution == "CentOS"
+  #cai dat goi cho Ubuntu
+  - name: install package for Centos
+    yum:
+      name: 
+        - httpd
+        - php
+    #  state: latest
+      state: absent
+    when: ansible_distribution == "CentOS"

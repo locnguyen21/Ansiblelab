@@ -1,0 +1,20 @@
+---
+  #host: liet ke cac host
+- hosts: all
+  #become sudo = true
+  become: true
+  
+  #task: cac nhiem vu duoc dinh nghia trong playbook
+  tasks:
+  #cai dat goi cho cac he dieu hanh linux khac nhau su dung module "package"
+  #thay vi apt hoac yum
+  - name: install and update index package for Linux distribution
+    package:
+      name:
+      # {  } la var, gia tri var duoc khai bao trong inventory 
+        - "{{ apache_package }}"
+        - "{{ php_package }}"
+      state: latest
+      update_cache: yes
+ 
+  
