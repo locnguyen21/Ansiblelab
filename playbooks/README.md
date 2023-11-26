@@ -18,7 +18,7 @@ Việc khai báo group trong inventory file giúp việc chạy task sẽ giúp 
 Tại file site.yml, việc thực hiện task với một group sẽ được ví dụ việc cài đặt nginx tại group [webservers]
 
 ```
-- hosts: webservers
+- hosts: webservers ---->>>>>>>>>>> đây là group được khai báo trong inventory file
   become: true
   tasks:
   
