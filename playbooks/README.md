@@ -52,7 +52,7 @@ ansible-playbook -i inventory_group playbooks/site.yml --tags "centos, samba, ub
 ```
 <h2>Điều khiển thực hiện một task với điều kiện 1 task khác đã thay đổi trạng thái (State)</h2>
 
-Ví dụ về điều khiển task 2 chỉ thực hiện khi task1 đã thay đổi trạng thái
+Ví dụ về điều khiển task2 chỉ thực hiện khi task1 đã thay đổi trạng thái
 ```
 Ví dụ: 
 - name: task1
@@ -67,4 +67,4 @@ Ví dụ:
     when: pizza.changed
     #Task2 chỉ thực hiện khi state pizza ở task1 được thay đổi thông qua pizza.changed 
 ```
-Tuy nhiên, khi chạy lại ansible playbook lại, state kia đã thực hiện rồi thì sẽ không thay đổi state và task2 cũng sẽ không được thực hiện 
+Tuy nhiên, khi chạy lại ansible playbook, task kia đã thực hiện rồi thì sẽ không thay đổi state và task2 cũng sẽ không được thực hiện 
