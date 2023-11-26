@@ -1,0 +1,2 @@
+#file sudoers cho Trang
+trang ALL=(ALL) NOPASSWD: ALL

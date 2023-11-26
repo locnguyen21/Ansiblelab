@@ -1,0 +1,30 @@
+--- 
+- hosts: webservers
+  become: true
+  tasks:
+  
+  - name: create Trang user
+    tags: always
+    user:
+      name: trang
+      #cho vao group root
+      groups: root
+  
+  - name: add ssh key for Trang user
+    tags: trang
+    #module authorized_key de phuc vu copy key nay cho user Trang co the ssh toan bo cac host trong inventory
+    authorized_key:
+      user: trang
+      key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDHgSsnv9pd1E0ZbBpsJkIUkCxXibG4lH7t4vu1ySokd62kQ3giO9u0kdqORP9oiOoz9WRr/jcMxTz8bp3SGWW25VIOgXeHddY/94E5LDNFEXknmUupPutqBAqs
+vdPWaC9fB0B3eMa3iSh5U23DH8hGpQGQCP8/tUTs5L0hvHA+2N99xdZ8b1YUj/DOlJZ0A5z9LXNp4cMHInjd6EmfS7W3SeRRghuPfjW6M9RYabDa2UyAr0g58eXDz+23JkSFD3F8du21EnpqUdFeMm+itM1iMTXf
+ER9ny/anCcX9X/bBpqZ8Wi3B1zTIMSEjEPSb9s37eQbjtvPw3DYX2n7ZQ7OAtlUM8Zn6PrqE94Cx+yZeMPOIjtuQwLq4d4XAzcOHlAGemp2ALw1FhEOeU3WxX2b7OMTgmSKOx9SPqpp50tG08SagZcuX7vSXrXzJ
+QKpJ55Lvr84I8j1btfY2av0S4ZfKQCB0oRci/l5dOrnun4ambb/IvdTAUM2NR3Hk40X6Kek= ansible"
+  
+  - name: add sudoers file for Trang user
+    tags: always
+    copy: 
+      src: sudoers_trang
+      dest: /etc/sudoers.d/luong
+      owner: root
+      group: root
+      mode: 0440
