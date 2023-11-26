@@ -1,0 +1,37 @@
+---
+- hosts: webservers
+  become: true
+  tasks:
+     
+  - name: instal apache and php
+    yum:
+      name: 
+        - httpd
+        - php
+      state: latest
+  
+  - name: start httpd (CentOS)
+    service:
+      name: httpd
+      state: started
+      enabled: yes
+
+  - name: change e-mail address for admin
+    tags: configandreload
+    #module lineinfile cho phep chinh sua dong (line) trong file
+    lineinfile: 
+      path: /etc/httpd/conf/httpd.conf
+      #tim den line co ky tu o duoi bat nguon dau tien nhu sau bang regex
+      regexp: '^ServerAdmin'
+      #thay the line tim duoc bang doan sau 
+      line: ServerAdmin locnc@where.net  
+    register: pizza
+    #dang ky register de co trang thai state cho task
+    
+  - name: restart httpd
+    tags: configandreload   
+    service:
+      name: httpd
+      state: restarted
+    when: pizza.changed
+    #chay task nay khi state cua register "pizza" da duoc thay doi
