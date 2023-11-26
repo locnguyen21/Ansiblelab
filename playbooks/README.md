@@ -3,6 +3,7 @@
 ```
 ansible-playbook --ask-become-pass playbooks/install_nginx.yml
 ```
+<h2> Làm việc với tags</h2>
 
 Làm việc tới tags: Tags được gán với từng việc "name" trong tags, việc sử dụng tags để giảm thiểu việc hoạt động cả playbook với những thành phần không cần chạy trong thời điểm người dùng không mong muốn (ví dụ test một task cụ thể). Cụ thể, việc khai báo tags như sau:
 - tags: always (đầu mục luôn được thực hiện)
