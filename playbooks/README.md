@@ -15,7 +15,7 @@ Việc khai báo group trong inventory file giúp việc chạy task sẽ giúp 
 192.168.10.3
 ```
 
-Tại file site.yml, việc thực hiện task với một group sẽ được ví dụ việc cài đặt nginx tại group <h5>[webservers]</h5>
+Tại file site.yml, việc thực hiện task với một group sẽ được ví dụ việc cài đặt nginx tại group [webservers]
 
 ```
 - hosts: webservers
