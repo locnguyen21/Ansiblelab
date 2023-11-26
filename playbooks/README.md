@@ -50,3 +50,21 @@ ansible-playbook -i inventory_group playbooks/site.yml --tags ubuntu --ask-becom
 Thực hiện các task có tags thuộc một trong những tag "centos, samba, ubuntu":
 ansible-playbook -i inventory_group playbooks/site.yml --tags "centos, samba, ubuntu" --ask-become-pass
 ```
+<h2>Điều khiển thực hiện một task với điều kiện 1 task khác đã thay đổi trạng thái (State)</h2>
+
+Ví dụ về điều khiển task 2 chỉ thực hiện khi task1 đã thay đổi trạng thái
+```
+Ví dụ: 
+- name: task1
+    noidungtask1:
+    ...
+    register: pizza
+    #Đặt trên trạng thái cho task bằng thông qua biến "register" có giá trị là pizza 
+
+- name: task2:
+    noidungtask2:
+    ....
+    when: pizza.changed
+    #Task2 chỉ thực hiện khi state pizza ở task1 được thay đổi thông qua pizza.changed 
+```
+Tuy nhiên, khi chạy lại ansible playbook lại, state kia đã thực hiện rồi thì sẽ không thay đổi state và task2 cũng sẽ không được thực hiện 
