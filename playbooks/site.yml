@@ -1,0 +1,57 @@
+---
+  #host: liet ke cac host
+- hosts: all
+  #become sudo = true
+  become: true
+
+# pre_tasks duoc khai bao viec can  thuc hien truoc khi thuc hien cac playbook
+  pre_tasks:
+  #task: cac nhiem vu duoc dinh nghia trong playbook
+  #tasks:
+  #cai dat goi cho cac he dieu hanh linux khac nhau su dung module "package"
+  #thay vi apt hoac yum
+  - name: instal updates (CentOS)
+    yum:
+      update_cache: yes
+      update_only: yes
+    when: ansible_distribution == "CentOS"
+ 
+  - name: install updates (Ubuntu, Debian)
+    apt:
+      upgrade: dist
+      update_cache: yes
+    when: ansible_distribution in ["Debian", "Ubuntu"]
+
+#khai bao su dung group [webservers] trong inventory file 
+- hosts: webservers
+  become: true
+  tasks:
+  
+  - name: install nginx
+    yum:
+      name: nginx
+      state: latest
+
+- hosts: dbservers
+  become: true
+  tasks:
+  - name: install mariadb package (CentOS)
+    yum:
+      name:
+      - mariadb-server
+      state: latest
+    when: ansible_distribution == "CentOS"
+  
+  - name: instal mariadb package (Ubuntu)
+    apt:
+      name: mariadb-server
+      state: latest
+    when: ansible_distribution == "Ubuntu"
+
+- hosts: fileservers
+  become: true
+  tasks:
+  - name: install samba
+    package:
+      name: samba
+      state: absent 

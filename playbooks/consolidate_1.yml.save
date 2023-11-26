@@ -1,0 +1,29 @@
+---
+  #host: liet ke cac host
+- hosts: all
+  #become sudo = true
+  become: true
+  
+  #task: cac nhiem vu duoc dinh nghia trong playbook
+  tasks:
+  #cai dat goi cho Ubuntu
+  - name: install and update for Ubuntu
+    apt:
+      name: 
+        - apache2
+        - libapache2-mod-php
+      state: latest
+      update_cache: yes
+    #ban chat deu su dung ham apt nen chuyen update_cache:yes ve task nay luon
+    when: ansible_distribution in ["Debian", "Ubuntu"]
+  
+  #cai dat goi cho CentOS
+  - name: install package for Centos
+    yum:
+      name: 
+        - httpd
+        - php
+   # state: latest
+    # state: absent
+      update_cache: yes
+    when: ansible_distribution == "CentOS"

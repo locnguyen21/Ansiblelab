@@ -1,0 +1,12 @@
+# chua danh sach cac host quan ly
+#tao cac group rieng de quan ly host, group duoc dinh nghia trong [ ]
+
+[webservers]
+192.168.10.3
+
+[dbservers]
+192.168.10.4
+192.168.10.3
+
+[fileservers]
+192.168.10.5
