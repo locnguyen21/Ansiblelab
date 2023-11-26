@@ -3,6 +3,32 @@
 ```
 ansible-playbook --ask-become-pass playbooks/install_nginx.yml
 ```
+<h2> Làm việc với group </h2>
+
+Việc khai báo group trong inventory file giúp việc chạy task sẽ giúp điều khiển công việc triển khai tốt hơn, quy hoạch nhóm host sẽ thực hiện gán các task cụ thể, ví dụ trong inventory file (file inventory_group)
+```
+[webservers]
+192.168.10.3
+
+[dbservers]
+192.168.10.4
+192.168.10.3
+```
+
+Tại file site.yml, việc thực hiện task với một group sẽ được ví dụ việc cài đặt nginx tại group <h5>[webservers]</h5>
+
+```
+- hosts: webservers
+  become: true
+  tasks:
+  
+  - name: install nginx
+    tags: webservers, centos
+    yum:
+      name: nginx
+      state: latest
+```
+
 <h2> Làm việc với tags</h2>
 
 Làm việc tới tags: Tags được gán với từng việc "name" trong tags, việc sử dụng tags để giảm thiểu việc hoạt động cả playbook với những thành phần không cần chạy trong thời điểm người dùng không mong muốn (ví dụ test một task cụ thể). Cụ thể, việc khai báo tags như sau:
